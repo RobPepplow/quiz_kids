@@ -97,7 +97,7 @@ export default function QuizGame() {
       {gameState === 'start' && (
         <Card className="w-full max-w-lg text-center shadow-2xl border-4 border-primary/50 rounded-2xl animate-in fade-in zoom-in-95">
           <CardHeader>
-            <CardTitle className="text-5xl font-bold text-primary-foreground drop-shadow-md" style={{WebkitTextStroke: '2px hsl(var(--accent))'}}>Quiz Meninos e Meninas!</CardTitle>
+            <CardTitle className="text-5xl font-bold text-primary-foreground drop-shadow-md" style={{WebkitTextStroke: '2px hsl(var(--accent))'}}>Quiz Conexão Kids Noite!</CardTitle>
             <CardDescription className="text-lg">Divertido e Educativo</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center gap-6 p-8">
