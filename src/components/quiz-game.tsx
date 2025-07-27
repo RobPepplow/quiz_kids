@@ -24,6 +24,7 @@ export default function QuizGame() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [timerKey, setTimerKey] = useState(0);
+  const [showCorrectAnswerMessage, setShowCorrectAnswerMessage] = useState(false);
 
   const currentQuestion = useMemo(() => shuffledQuestions[currentQuestionIndex], [shuffledQuestions, currentQuestionIndex]);
 
@@ -44,10 +45,12 @@ export default function QuizGame() {
     setShuffledQuestions(shuffleArray(allQuestions).slice(0, TOTAL_QUESTIONS));
     setIsAnswered(false);
     setSelectedAnswer(null);
+    setShowCorrectAnswerMessage(false);
     setGameState('turn-announcement');
   };
 
   const handleNextQuestion = useCallback(() => {
+    setShowCorrectAnswerMessage(false);
     if (currentQuestionIndex < TOTAL_QUESTIONS - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setActiveTeam(prev => (prev === 1 ? 2 : 1));
@@ -64,12 +67,14 @@ export default function QuizGame() {
 
     setIsAnswered(true);
     setSelectedAnswer(optionIndex);
+    const correct = optionIndex === currentQuestion.correct;
 
-    if (optionIndex === currentQuestion.correct) {
+    if (correct) {
       setScores(prev => ({
         ...prev,
         [`team${activeTeam}`]: prev[`team${activeTeam}`] + 1,
       }));
+      setShowCorrectAnswerMessage(true);
     }
     
     setTimeout(() => {
@@ -193,11 +198,17 @@ export default function QuizGame() {
                 </div>
               </div>
               <div className="w-full bg-muted h-4">
-                 {!isAnswered && <div key={timerKey} className="h-4 bg-accent animate-countdown" onAnimationEnd={handleTimeUp} style={{animationDuration: `${TIME_PER_QUESTION}s`}}></div>}
+                 {!isAnswered && <div key={timerKey} className={cn("h-4 animate-countdown", activeTeam === 1 ? 'bg-pink-400' : 'bg-accent')} onAnimationEnd={handleTimeUp} style={{animationDuration: `${TIME_PER_QUESTION}s`}}></div>}
               </div>
             </CardHeader>
             <CardContent className="p-6 sm:p-8 flex flex-col gap-6">
-              <p className="text-center text-2xl font-bold min-h-[6rem] flex items-center justify-center">{currentQuestion?.question}</p>
+              <div className="text-center text-2xl font-bold min-h-[6rem] flex items-center justify-center">
+              {showCorrectAnswerMessage ? (
+                <p className="text-green-600 animate-tada text-3xl">{`Acertaram, ${teamNames[`team${activeTeam}`]}!`}</p>
+              ) : (
+                <p>{currentQuestion?.question}</p>
+              )}
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {currentQuestion?.options.map((option, index) => {
                   const isCorrect = index === currentQuestion.correct;
