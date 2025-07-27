@@ -155,5 +155,160 @@ export const questions: Question[] = [
       "Que Ele não se importa com as famílias."
     ],
     "correct": 2
+  },
+  {
+    "id": 16,
+    "question": "Como a mulher doente foi chamada por Jesus após ser curada?",
+    "options": ["Filha", "Irmã", "Amiga", "Serva"],
+    "correct": 0
+  },
+  {
+    "id": 17,
+    "question": "O que os discípulos disseram quando Jesus perguntou quem o havia tocado?",
+    "options": [
+      "Todos estavam tocando em Jesus por causa da multidão.",
+      "Que ninguém o havia tocado.",
+      "Que a mulher estava chorando.",
+      "Que Jairo havia chamado por Ele."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 18,
+    "question": "Qual era a idade da menina filha de Jairo?",
+    "options": ["8 anos", "10 anos", "12 anos", "14 anos"],
+    "correct": 2
+  },
+  {
+    "id": 19,
+    "question": "Qual foi a reação das pessoas quando a menina voltou à vida?",
+    "options": [
+      "Saíram correndo.",
+      "Ficaram admiradas e cheias de alegria.",
+      "Ficaram com medo.",
+      "Não acreditaram."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 20,
+    "question": "Por que a mulher não pediu ajuda diretamente a Jesus?",
+    "options": [
+      "Porque tinha vergonha de sua doença.",
+      "Porque não sabia onde Ele estava.",
+      "Porque Jesus não a conhecia.",
+      "Porque não queria chamar atenção."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 21,
+    "question": "O que Jesus disse a Jairo quando soube que sua filha havia morrido?",
+    "options": [
+      "Não tenha medo; apenas creia.",
+      "Sua filha já partiu.",
+      "Chame os vizinhos para ajudar.",
+      "Espere mais um pouco."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 22,
+    "question": "Onde Jesus estava quando Jairo veio pedir ajuda?",
+    "options": [
+      "Perto do mar.",
+      "No templo.",
+      "Na casa de Pedro.",
+      "No deserto."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 23,
+    "question": "O que os mensageiros disseram para Jairo antes de Jesus chegar?",
+    "options": [
+      "Sua filha já morreu; não incomode o Mestre.",
+      "A menina está bem.",
+      "Jesus não pode ajudar.",
+      "Volte para casa imediatamente."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 24,
+    "question": "Qual palavra Jesus usou para chamar a menina de Jairo de volta à vida?",
+    "options": [
+      "Menina, acorde!",
+      "Menina, levante-se!",
+      "Levanta, minha filha!",
+      "Filha, desperte!"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 25,
+    "question": "O que os pais da menina fizeram depois que ela reviveu?",
+    "options": [
+      "Ficaram maravilhados.",
+      "Foram contar para todos.",
+      "Chamaram os sacerdotes.",
+      "Ofereceram um sacrifício."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 26,
+    "question": "Por que Jesus pediu que não contassem a ninguém sobre a menina?",
+    "options": [
+      "Para evitar tumulto da multidão.",
+      "Porque não foi um milagre.",
+      "Porque a menina estava doente novamente.",
+      "Porque Jairo pediu segredo."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 27,
+    "question": "Quantas pessoas entraram no quarto da menina junto com Jesus?",
+    "options": [
+      "Cinco pessoas.",
+      "Sete pessoas.",
+      "Quatro pessoas.",
+      "Três pessoas."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 28,
+    "question": "Como Jesus se referiu à fé da mulher que Ele curou?",
+    "options": [
+      "Sua fé foi pequena.",
+      "Sua fé te salvou.",
+      "Você precisou de ajuda.",
+      "Você foi curada pela multidão."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 29,
+    "question": "O que os discípulos acharam quando Jesus disse que saiu poder dele?",
+    "options": [
+      "Ficaram confusos, pois muitos o tocavam.",
+      "Sabiam que era a mulher.",
+      "Acreditaram imediatamente.",
+      "Ignoraram."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 30,
+    "question": "O que a história de Jairo e da mulher doente nos ensina?",
+    "options": [
+      "Que devemos ter fé em Jesus.",
+      "Que devemos temer a multidão.",
+      "Que milagres são impossíveis.",
+      "Que Jesus só ajuda os ricos."
+    ],
+    "correct": 0
   }
 ];

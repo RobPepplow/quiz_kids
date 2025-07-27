@@ -56,13 +56,13 @@ export default function QuizGame() {
     if (optionIndex === currentQuestion.correct) {
       setScores(prev => ({
         ...prev,
-        [`team${activeTeam}`]: prev[`team${activeTeam}`] + 10,
+        [`team${activeTeam}`]: prev[`team${activeTeam}`] + 1,
       }));
     }
     
     setTimeout(() => {
       handleNextQuestion();
-    }, 2500);
+    }, 4500);
   };
   
   const handleTimeUp = useCallback(() => {
@@ -108,11 +108,11 @@ export default function QuizGame() {
           )}
           <div className="flex justify-around w-full mt-4 text-xl">
             <div className="flex flex-col items-center gap-2">
-              <p className="font-bold text-primary">Equipe 1</p>
+              <p className="font-bold text-primary">Meninas</p>
               <p className="text-3xl font-extrabold">{scores.team1} pts</p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <p className="font-bold text-accent">Equipe 2</p>
+              <p className="font-bold text-accent">Meninos</p>
               <p className="text-3xl font-extrabold">{scores.team2} pts</p>
             </div>
           </div>
