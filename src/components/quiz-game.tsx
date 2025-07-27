@@ -15,7 +15,7 @@ const TOTAL_QUESTIONS = 15;
 const TIME_PER_QUESTION = 20;
 
 export default function QuizGame() {
-  const [gameState, setGameState] = useState<'start' | 'playing' | 'end'>('start');
+  const [gameState, setGameState] = useState<'start' | 'turn-announcement' | 'playing' | 'end'>('start');
   const [scores, setScores] = useState({ team1: 0, team2: 0 });
   const [teamNames, setTeamNames] = useState({ team1: 'Meninas', team2: 'Meninos' });
   const [activeTeam, setActiveTeam] = useState<1 | 2>(1);
@@ -27,6 +27,16 @@ export default function QuizGame() {
 
   const currentQuestion = useMemo(() => shuffledQuestions[currentQuestionIndex], [shuffledQuestions, currentQuestionIndex]);
 
+  useEffect(() => {
+    if (gameState === 'turn-announcement') {
+      const timer = setTimeout(() => {
+        setGameState('playing');
+        setTimerKey(prev => prev + 1);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [gameState]);
+
   const handleStart = () => {
     setScores({ team1: 0, team2: 0 });
     setCurrentQuestionIndex(0);
@@ -34,8 +44,7 @@ export default function QuizGame() {
     setShuffledQuestions(shuffleArray(allQuestions).slice(0, TOTAL_QUESTIONS));
     setIsAnswered(false);
     setSelectedAnswer(null);
-    setTimerKey(prev => prev + 1);
-    setGameState('playing');
+    setGameState('turn-announcement');
   };
 
   const handleNextQuestion = useCallback(() => {
@@ -44,7 +53,7 @@ export default function QuizGame() {
       setActiveTeam(prev => (prev === 1 ? 2 : 1));
       setIsAnswered(false);
       setSelectedAnswer(null);
-      setTimerKey(prev => prev + 1);
+      setGameState('turn-announcement');
     } else {
       setGameState('end');
     }
@@ -102,6 +111,19 @@ export default function QuizGame() {
           </Button>
         </CardContent>
       </Card>
+    );
+  }
+
+  if (gameState === 'turn-announcement') {
+    return (
+      <div className="w-full max-w-lg text-center animate-in fade-in zoom-in-95">
+        <h2 className="text-6xl font-extrabold text-primary-foreground drop-shadow-lg" style={{WebkitTextStroke: '2px hsl(var(--accent))'}}>
+          Agora são os/as
+        </h2>
+        <h1 className="text-8xl font-extrabold text-primary-foreground drop-shadow-lg mt-4" style={{WebkitTextStroke: '3px hsl(var(--accent))'}}>
+          {teamNames[`team${activeTeam}`]}
+        </h1>
+      </div>
     );
   }
 
