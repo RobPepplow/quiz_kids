@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Quiz Kids Divertido',
+  title: 'Quiz Meninos e Meninas',
   description: 'Um quiz divertido para crianças em equipes!',
 };
 

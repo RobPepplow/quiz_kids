@@ -4,17 +4,20 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { questions as allQuestions, type Question } from "@/data/questions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Users, Trophy, Clock, Star, PartyPopper, RefreshCw, CheckCircle, XCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Users, Trophy, Clock, PartyPopper, RefreshCw, CheckCircle, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const shuffleArray = (array: any[]) => [...array].sort(() => Math.random() - 0.5);
 
-const TOTAL_QUESTIONS = 10;
-const TIME_PER_QUESTION = 10;
+const TOTAL_QUESTIONS = 15;
+const TIME_PER_QUESTION = 20;
 
 export default function QuizGame() {
   const [gameState, setGameState] = useState<'start' | 'playing' | 'end'>('start');
   const [scores, setScores] = useState({ team1: 0, team2: 0 });
+  const [teamNames, setTeamNames] = useState({ team1: 'Meninas', team2: 'Meninos' });
   const [activeTeam, setActiveTeam] = useState<1 | 2>(1);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
@@ -76,13 +79,23 @@ export default function QuizGame() {
 
   if (gameState === 'start') {
     return (
-      <Card className="w-full max-w-md text-center shadow-2xl border-4 border-primary/50 rounded-2xl animate-in fade-in zoom-in-95">
+      <Card className="w-full max-w-lg text-center shadow-2xl border-4 border-primary/50 rounded-2xl animate-in fade-in zoom-in-95">
         <CardHeader>
-          <CardTitle className="text-5xl font-bold text-primary-foreground drop-shadow-md" style={{WebkitTextStroke: '2px hsl(var(--accent))'}}>Quiz Kids!</CardTitle>
+          <CardTitle className="text-5xl font-bold text-primary-foreground drop-shadow-md" style={{WebkitTextStroke: '2px hsl(var(--accent))'}}>Quiz Meninos e Meninas!</CardTitle>
           <CardDescription className="text-lg">Divertido e Educativo</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center gap-6 p-8">
           <PartyPopper className="w-24 h-24 text-accent animate-tada" strokeWidth={1.5} />
+          <div className="w-full space-y-4">
+             <div className="space-y-2">
+                <Label htmlFor="team1" className="text-lg">Nome da Equipe 1</Label>
+                <Input id="team1" value={teamNames.team1} onChange={(e) => setTeamNames(prev => ({...prev, team1: e.target.value}))} className="text-center text-lg"/>
+             </div>
+             <div className="space-y-2">
+                <Label htmlFor="team2" className="text-lg">Nome da Equipe 2</Label>
+                <Input id="team2" value={teamNames.team2} onChange={(e) => setTeamNames(prev => ({...prev, team2: e.target.value}))} className="text-center text-lg"/>
+             </div>
+          </div>
           <p className="text-xl">Junte seus amigos e prepare-se para o desafio!</p>
           <Button onClick={handleStart} size="lg" className="text-2xl h-16 rounded-full px-10 shadow-lg hover:scale-105 transition-transform">
             Começar
@@ -93,7 +106,7 @@ export default function QuizGame() {
   }
 
   if (gameState === 'end') {
-    const winner = scores.team1 > scores.team2 ? 'Equipe 1' : scores.team2 > scores.team1 ? 'Equipe 2' : 'Empate';
+    const winner = scores.team1 > scores.team2 ? teamNames.team1 : scores.team2 > scores.team1 ? teamNames.team2 : 'Empate';
     return (
       <Card className="w-full max-w-md text-center shadow-2xl border-4 border-primary/50 rounded-2xl animate-in fade-in zoom-in-95">
         <CardHeader>
@@ -108,11 +121,11 @@ export default function QuizGame() {
           )}
           <div className="flex justify-around w-full mt-4 text-xl">
             <div className="flex flex-col items-center gap-2">
-              <p className="font-bold text-primary">Meninas</p>
+              <p className="font-bold text-primary">{teamNames.team1}</p>
               <p className="text-3xl font-extrabold">{scores.team1} pts</p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <p className="font-bold text-accent">Meninos</p>
+              <p className="font-bold text-accent">{teamNames.team2}</p>
               <p className="text-3xl font-extrabold">{scores.team2} pts</p>
             </div>
           </div>
@@ -127,17 +140,24 @@ export default function QuizGame() {
   return (
     <div className="w-full max-w-3xl flex flex-col gap-6 animate-in fade-in">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {[1, 2].map(teamNum => (
-          <Card key={teamNum} className={cn("transition-all duration-300 shadow-md border-4", activeTeam === teamNum ? 'border-primary scale-105' : 'border-transparent', `team-${teamNum}`)}>
+          <Card className={cn("transition-all duration-300 shadow-md border-4", activeTeam === 1 ? 'border-primary scale-105' : 'border-transparent', `team-1`)}>
             <CardContent className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Users className={cn("h-8 w-8", teamNum === 1 ? 'text-primary' : 'text-accent')} />
-                <p className="text-xl font-bold">Equipe {teamNum}</p>
+                <Users className={cn("h-8 w-8", 'text-primary')} />
+                <p className="text-xl font-bold">{teamNames.team1}</p>
               </div>
-              <p className="text-3xl font-extrabold">{scores[`team${teamNum as 1 | 2}`]}</p>
+              <p className="text-3xl font-extrabold">{scores.team1}</p>
             </CardContent>
           </Card>
-        ))}
+          <Card className={cn("transition-all duration-300 shadow-md border-4", activeTeam === 2 ? 'border-primary scale-105' : 'border-transparent', `team-2`)}>
+            <CardContent className="p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Users className={cn("h-8 w-8", 'text-accent')} />
+                <p className="text-xl font-bold">{teamNames.team2}</p>
+              </div>
+              <p className="text-3xl font-extrabold">{scores.team2}</p>
+            </CardContent>
+          </Card>
       </div>
 
       <Card className="shadow-2xl rounded-2xl overflow-hidden">
@@ -150,7 +170,7 @@ export default function QuizGame() {
             </div>
           </div>
           <div className="w-full bg-muted h-4">
-             {!isAnswered && <div key={timerKey} className="h-4 bg-accent animate-countdown" onAnimationEnd={handleTimeUp}></div>}
+             {!isAnswered && <div key={timerKey} className="h-4 bg-accent animate-countdown" onAnimationEnd={handleTimeUp} style={{animationDuration: `${TIME_PER_QUESTION}s`}}></div>}
           </div>
         </CardHeader>
         <CardContent className="p-6 sm:p-8 flex flex-col gap-6">
